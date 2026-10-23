@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neko Mengesha</title>
+<meta name="description" content="Nekodemose Mengesha: electrical engineer working on autonomous driving, power systems and robotics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night-city dossier. Searchlight hero, then a single 72rem column of
+   file sections, each with a mono index label on the left and content on the right. */
+:root {
+  --night: #0a0c0f;        /* page ground, blue-black */
+  --steel: #12151a;        /* raised surfaces */
+  --rivet: #232830;        /* hairlines and borders */
+  --chrome: #dde1e6;       /* primary text */
+  --ash: #8b939e;          /* secondary text */
+  --brass: #c8a24c;        /* the one accent: searchlight / Wayne gold */
+  --brass-soft: rgba(200, 162, 76, .14);
+
+  --display: "Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --step--1: .8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2.25rem, 5vw, 3.25rem);
+  --step-4: clamp(3.25rem, 11vw, 8.5rem);
+
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--chrome);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--brass); color: var(--night); }
+
+.wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+/* ---------- Nav ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night);
+}
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: rgba(10, 12, 15, .82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rivet);
+}
+.nav .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: .85rem;
+}
+.mark {
+  font-family: var(--display); font-weight: 900; font-size: 1.35rem;
+  letter-spacing: .08em; text-decoration: none;
+  display: inline-flex; align-items: center; gap: .55rem;
+}
+.mark span {
+  display: inline-grid; place-items: center; width: 2rem; height: 2rem;
+  border: 1px solid var(--brass); color: var(--brass); font-size: 1rem;
+}
+.nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+.nav ul a { text-decoration: none; color: var(--ash); transition: color .2s; }
+.nav ul a:hover { color: var(--brass); }
+@media (max-width: 640px) { .nav ul { display: none; } }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--rivet);
+}
+.beam {
+  position: absolute; inset: -40% -20% auto auto; width: 120%; height: 180%;
+  pointer-events: none;
+  background: conic-gradient(from 200deg at 85% 100%,
+    transparent 0deg, var(--brass-soft) 12deg, rgba(200,162,76,.05) 26deg, transparent 34deg);
+  transform-origin: 85% 100%;
+  animation: sweep 14s ease-in-out infinite alternate;
+}
+.skyline {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 38%;
+  pointer-events: none; opacity: .55;
+}
+@keyframes sweep { from { transform: rotate(-9deg); } to { transform: rotate(7deg); } }
+@media (prefers-reduced-motion: reduce) { .beam { animation: none; } html { scroll-behavior: auto; } }
+
+.hero .wrap { position: relative; padding-block: clamp(4rem, 12vw, 8rem) clamp(5rem, 14vw, 10rem); }
+.hero h1 {
+  font-family: var(--display); font-weight: 900; font-size: var(--step-4);
+  line-height: .86; letter-spacing: .01em; text-transform: uppercase;
+  margin: 1.25rem 0 1.5rem;
+}
+.hero h1 em { font-style: normal; color: var(--brass); }
+.thesis {
+  max-width: 38rem; font-size: var(--step-1); line-height: 1.5; color: var(--chrome);
+  margin: 0 0 2rem; text-wrap: balance;
+}
+.status {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-family: var(--mono); font-size: var(--step--1); letter-spacing: .08em;
+  border: 1px solid var(--rivet); background: var(--steel);
+  padding: .45rem .8rem;
+}
+.status i {
+  width: .5rem; height: .5rem; border-radius: 50%; background: var(--brass);
+  box-shadow: 0 0 0 4px var(--brass-soft);
+}
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--mono); font-size: .875rem; letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  padding: .8rem 1.2rem; border: 1px solid var(--rivet); background: transparent; color: var(--chrome);
+  transition: border-color .2s, color .2s, background .2s;
+}
+.btn:hover { border-color: var(--brass); color: var(--brass); }
+.btn.primary { background: var(--brass); border-color: var(--brass); color: var(--night); font-weight: 500; }
+.btn.primary:hover { background: transparent; color: var(--brass); }
+
+/* ---------- Sections ---------- */
+section.file { border-bottom: 1px solid var(--rivet); }
+section.file > .wrap {
+  display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 2rem 3rem;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+@media (max-width: 820px) { section.file > .wrap { grid-template-columns: minmax(0, 1fr); } }
+.file-head { position: relative; }
+.file-head .label { display: block; color: var(--brass); margin-bottom: .5rem; }
+.file-head h2 {
+  font-family: var(--display); font-weight: 700; font-size: var(--step-3);
+  line-height: .95; text-transform: uppercase; margin: 0; text-wrap: balance;
+}
+@media (min-width: 821px) { .file-head > div { position: sticky; top: 6rem; } }
+
+/* Readout band */
+.readout { border-bottom: 1px solid var(--rivet); background: var(--steel); }
+.readout .wrap {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-block: 0;
+}
+.readout div { padding: 1.4rem 1.25rem; border-left: 1px solid var(--rivet); }
+.readout div:last-child { border-right: 1px solid var(--rivet); }
+.readout b {
+  display: block; font-family: var(--display); font-weight: 700; font-size: var(--step-2);
+  text-transform: uppercase; line-height: 1.05; margin-top: .3rem;
+}
+@media (max-width: 820px) {
+  .readout .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .readout div:nth-child(2) { border-right: 1px solid var(--rivet); }
+  .readout div:nth-child(-n+2) { border-bottom: 1px solid var(--rivet); }
+}
+
+/* Experience timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.role {
+  display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: .25rem 2rem;
+  padding: 1.75rem 0; border-top: 1px solid var(--rivet);
+}
+.role:first-child { border-top: 0; padding-top: 0; }
+.role .when { font-family: var(--mono); font-size: var(--step--1); color: var(--ash); padding-top: .35rem; font-variant-numeric: tabular-nums; }
+.role h3 { margin: 0; font-size: var(--step-1); font-weight: 600; line-height: 1.3; }
+.role h3 span { color: var(--brass); font-weight: 500; }
+.role .where { color: var(--ash); font-size: .9rem; margin: .15rem 0 .8rem; }
+.role ul { margin: 0; padding-left: 1.1rem; color: #c3c8cf; max-width: 62ch; }
+.role li { margin-bottom: .4rem; }
+.role li::marker { color: var(--brass); }
+.role.current h3::after {
+  content: "Active"; margin-left: .7rem; vertical-align: middle;
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--night); background: var(--brass); padding: .15rem .45rem;
+}
+@media (max-width: 560px) { .role { grid-template-columns: minmax(0, 1fr); } }
+
+/* Projects */
+.projects { display: grid; gap: 1.25rem; }
+.project {
+  border: 1px solid var(--rivet); background: var(--steel);
+  display: grid; grid-template-columns: minmax(0, 1fr) 15rem;
+}
+.project .body { padding: 1.75rem; min-width: 0; }
+.project .code { font-family: var(--mono); font-size: var(--step--1); color: var(--brass); letter-spacing: .1em; }
+.project h3 {
+  font-family: var(--display); font-weight: 700; font-size: var(--step-2);
+  text-transform: uppercase; line-height: 1; margin: .5rem 0 .9rem;
+}
+.project p { margin: 0 0 .75rem; color: #c3c8cf; max-width: 60ch; }
+.project .spec {
+  border-left: 1px solid var(--rivet); padding: 1.75rem 1.5rem;
+  display: grid; align-content: start; gap: 1rem;
+}
+.project .spec dt { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ash); }
+.project .spec dd { margin: .15rem 0 0; font-size: .92rem; }
+.project.lead { border-color: rgba(200, 162, 76, .45); }
+@media (max-width: 720px) {
+  .project { grid-template-columns: minmax(0, 1fr); }
+  .project .spec { border-left: 0; border-top: 1px solid var(--rivet); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* GitHub */
+.repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1rem; }
+.repo {
+  display: grid; gap: .5rem; align-content: start; text-decoration: none;
+  border: 1px solid var(--rivet); padding: 1.25rem; background: var(--steel);
+  transition: border-color .2s;
+}
+.repo:hover { border-color: var(--brass); }
+.repo b { font-family: var(--mono); font-weight: 500; color: var(--brass); overflow-wrap: anywhere; }
+.repo p { margin: 0; color: var(--ash); font-size: .92rem; }
+.repo small { font-family: var(--mono); color: var(--ash); font-size: .75rem; }
+.vault {
+  border: 1px dashed var(--rivet); padding: 2rem; display: grid; gap: 1rem; justify-items: start;
+}
+.vault p { margin: 0; color: #c3c8cf; max-width: 56ch; }
+
+/* Skills & education */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+@media (max-width: 640px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.cols h3 { font-family: var(--mono); font-weight: 500; font-size: var(--step--1); letter-spacing: .14em; text-transform: uppercase; color: var(--brass); margin: 0 0 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+.chips li { border: 1px solid var(--rivet); padding: .35rem .7rem; font-size: .9rem; }
+.edu { display: grid; gap: 1.25rem; }
+.edu div b { display: block; font-weight: 600; }
+.edu div span { color: var(--ash); font-size: .92rem; }
+.roster { columns: 2 14rem; column-gap: 2rem; padding-left: 1.1rem; margin: 0; color: #c3c8cf; }
+.roster li { break-inside: avoid; margin-bottom: .35rem; }
+.roster li::marker { color: var(--brass); }
+
+/* Contact */
+.signal { text-align: left; }
+.signal .wrap { padding-block: clamp(4rem, 10vw, 7rem); display: grid; gap: 1.5rem; }
+.signal h2 {
+  font-family: var(--display); font-weight: 900; font-size: clamp(2.75rem, 9vw, 6rem);
+  text-transform: uppercase; line-height: .9; margin: 0; max-width: 14ch;
+}
+.signal h2 em { font-style: normal; color: var(--brass); }
+.email {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem;
+  font-family: var(--mono); font-size: clamp(1rem, 3.5vw, 1.35rem);
+}
+.email code { user-select: all; overflow-wrap: anywhere; }
+.toast { font-family: var(--mono); font-size: var(--step--1); color: var(--brass); min-height: 1.2em; }
+footer { border-top: 1px solid var(--rivet); }
+footer .wrap { padding-block: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="mark" href="#top"><span>NM</span>MENGESHA</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="beam" aria-hidden="true"></div>
+  <canvas class="skyline" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="status"><i></i>Now: Autopilot Engineer, Tesla</span>
+    <h1>Nekodemose<br><em>Mengesha</em></h1>
+    <p class="thesis">Electrical engineer from Boston. I test self-driving systems, size emergency power for industrial plants, and build robotic hardware.</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">See the work</a>
+      <a class="btn" href="https://www.linkedin.com/in/nekomengesha/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/nekogesha" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="readout" aria-label="At a glance">
+  <div class="wrap">
+    <div><span class="label">Discipline</span><b>Electrical Eng.</b></div>
+    <div><span class="label">Base</span><b>Boston, MA</b></div>
+    <div><span class="label">Domains</span><b>Autonomy · Power · Robotics</b></div>
+    <div><span class="label">School</span><b>UMass Boston</b></div>
+  </div>
+</div>
+
+<section class="file" id="experience">
+  <div class="wrap">
+    <div class="file-head"><div><span class="label">File 01</span><h2>Field Record</h2></div></div>
+    <ol class="timeline">
+      <li class="role current">
+        <div class="when">May 2026 – Now</div>
+        <div>
+          <h3>Autopilot Engineer <span>· Tesla</span></h3>
+          <p class="where">Boston, MA</p>
+          <ul>
+            <li>Evaluate real-world performance of Autopilot and Full Self-Driving (FSD) across varied traffic and environmental conditions.</li>
+            <li>Monitor vehicle perception, planning and control behavior, intervening when needed to keep operation safe.</li>
+            <li>Identify and document edge-case scenarios that feed validation and ongoing improvement of autonomous driving.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Jun – Aug 2025</div>
+        <div>
+          <h3>Project Engineer Intern <span>· Twin River Technologies</span></h3>
+          <p class="where">Quincy, MA</p>
+          <ul>
+            <li>Wrote an Emergency Generator Load Assessment: total connected load against generator capacity, missing loads found on single-line diagrams, and a long-term replacement plan based on plant growth and thermal risk.</li>
+            <li>Worked with electricians and engineers on substation layouts, capacitor banks, power factor correction, and gaps between drawings and field conditions.</li>
+            <li>Presented on industrial electricity and site distribution, and supported process safety reviews, walkdowns and audits.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Oct – Dec 2023</div>
+        <div>
+          <h3>Inventor Intern <span>· Lemelson-MIT</span></h3>
+          <p class="where">Cambridge, MA</p>
+          <ul>
+            <li>Led development of a product designed to reduce loneliness and support emotional well-being.</li>
+            <li>Ran meetings with professionals across industries and pitched the product to each audience.</li>
+            <li>Researched and worked through the patent process to protect the team's ideas.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="role">
+        <div class="when">Jun – Aug 2023</div>
+        <div>
+          <h3>Engineering Intern <span>· Turner Construction</span></h3>
+          <p class="where">Boston, MA</p>
+          <ul>
+            <li>Produced progress and challenge reports across multiple construction sites.</li>
+            <li>Enforced jobsite safety standards and regulatory requirements.</li>
+            <li>Worked with architects and civil engineers through the project lifecycle to hit milestones.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="file" id="projects">
+  <div class="wrap">
+    <div class="file-head"><div><span class="label">File 02</span><h2>Builds</h2></div></div>
+    <div class="projects">
+      <article class="project lead">
+        <div class="body">
+          <span class="code">PRJ-HAND · 2023</span>
+          <h3>Robotic Prosthetic Hand</h3>
+          <p>A 3D-printed robotic hand that reads sensor input from the wearer's arm and turns it into lifelike clenching and gripping.</p>
+          <p>I led a cross-functional team, programmed the microcontroller, developed the sensor system and optimized the circuit boards, then documented and demonstrated the working build.</p>
+        </div>
+        <dl class="spec">
+          <div><dt>Role</dt><dd>Team lead, firmware, electronics</dd></div>
+          <div><dt>Stack</dt><dd>Microcontroller, sensors, PCB, TinkerCAD, 3D printing</dd></div>
+          <div><dt>Where</dt><dd>Cambridge, MA</dd></div>
+        </dl>
+      </article>
+      <article class="project">
+        <div class="body">
+          <span class="code">PRJ-GEN · 2025</span>
+          <h3>Emergency Generator Load Assessment</h3>
+          <p>A full audit of an industrial plant's standby power. I tallied connected load (kW / kVA) against generator rating, traced loads missing from the single-line diagrams, and planned replacement around plant growth and thermal risk.</p>
+        </div>
+        <dl class="spec">
+          <div><dt>Role</dt><dd>Project engineer intern</dd></div>
+          <div><dt>Scope</dt><dd>Load calcs, SLDs, power factor, substations</dd></div>
+          <div><dt>Client</dt><dd>Twin River Technologies</dd></div>
+        </dl>
+      </article>
+      <article class="project">
+        <div class="body">
+          <span class="code">PRJ-LMIT · 2023</span>
+          <h3>Loneliness Product, Lemelson-MIT</h3>
+          <p>An invention program build aimed at loneliness. I led the product's development, pitched it to industry professionals, and took it through patent research and filing steps.</p>
+        </div>
+        <dl class="spec">
+          <div><dt>Role</dt><dd>Lead inventor</dd></div>
+          <div><dt>Scope</dt><dd>Product design, IP, pitching</dd></div>
+          <div><dt>Program</dt><dd>Lemelson-MIT</dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="file" id="github">
+  <div class="wrap">
+    <div class="file-head"><div><span class="label">File 03</span><h2>Code Vault</h2></div></div>
+    <div>
+      <div class="repo-grid" id="repos" hidden></div>
+      <div class="vault" id="vault">
+        <span class="label">github.com/nekogesha</span>
+        <p>Public repositories show up here automatically, with language, stars and last update, as soon as they go public on GitHub.</p>
+        <a class="btn" href="https://github.com/nekogesha" target="_blank" rel="noopener">Open GitHub profile ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="file" id="arsenal">
+  <div class="wrap">
+    <div class="file-head"><div><span class="label">File 04</span><h2>Arsenal</h2></div></div>
+    <div class="cols">
+      <div>
+        <h3>Engineering</h3>
+        <ul class="chips">
+          <li>Python</li><li>Java</li><li>Machine learning</li><li>Microcontrollers</li>
+          <li>Circuit design</li><li>Power distribution</li><li>Load analysis</li>
+          <li>TinkerCAD</li><li>3D printing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Operations</h3>
+        <ul class="chips">
+          <li>Project management</li><li>Data visualization</li><li>Database management</li>
+          <li>Qualitative research</li><li>Safety audits</li><li>Microsoft Office</li><li>Google Workspace</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <div class="edu">
+          <div><b>University of Massachusetts Boston</b><span>B.E. Electrical Engineering · School of Engineering · 2023 – present</span></div>
+          <div><b>Cambridge Rindge and Latin School</b><span>Cambridge, MA · 2019 – 2023</span></div>
+        </div>
+      </div>
+      <div>
+        <h3>Off the clock</h3>
+        <ul class="roster">
+          <li>Co-founder, Cyber Security Club</li>
+          <li>Senior Rep, Black Student Union</li>
+          <li>Cambridge student tutor</li>
+          <li>Harvard School to Work program</li>
+          <li>ACE Mentors</li>
+          <li>Breakthrough</li>
+          <li>Ethiopian Eritrean Student Association</li>
+          <li>EOTC Boston</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signal" id="contact">
+  <div class="wrap">
+    <span class="label">File 05 · Contact</span>
+    <h2>Light the <em>signal.</em></h2>
+    <p class="thesis">Open to engineering roles in autonomy, power systems and hardware. The fastest way to reach me is email.</p>
+    <div class="email">
+      <code id="addr">nekodemosem@gmail.com</code>
+      <button class="btn" id="copy" type="button">Copy</button>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <div class="actions">
+      <a class="btn" href="https://www.linkedin.com/in/nekomengesha/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/nekogesha" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap label">
+    <span>© 2026 Nekodemose Mengesha</span>
+    <span>Boston, MA</span>
+  </div>
+</footer>
+
+<script>
+// Skyline silhouette, drawn once per resize
+(function () {
+  const c = document.querySelector('.skyline');
+  const ctx = c.getContext('2d');
+  function draw() {
+    const w = c.clientWidth, h = c.clientHeight, dpr = window.devicePixelRatio || 1;
+    c.width = w * dpr; c.height = h * dpr; ctx.scale(dpr, dpr);
+    let seed = 7;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    ctx.fillStyle = '#12151a';
+    let x = 0;
+    while (x < w) {
+      const bw = 24 + rnd() * 60, bh = h * (.25 + rnd() * .7);
+      ctx.fillRect(x, h - bh, bw, bh);
+      if (rnd() > .7) ctx.fillRect(x + bw / 2 - 1, h - bh - 18, 2, 18);
+      ctx.fillStyle = 'rgba(200,162,76,.35)';
+      for (let wy = h - bh + 8; wy < h - 6; wy += 11)
+        for (let wx = x + 5; wx < x + bw - 6; wx += 9)
+          if (rnd() > .93) ctx.fillRect(wx, wy, 3, 4);
+      ctx.fillStyle = '#12151a';
+      x += bw + 2;
+    }
+  }
+  draw();
+  addEventListener('resize', draw);
+})();
+
+// Copy email
+document.getElementById('copy').addEventListener('click', () => {
+  const toast = document.getElementById('toast');
+  const addr = document.getElementById('addr');
+  navigator.clipboard.writeText(addr.textContent).then(
+    () => { toast.textContent = 'Email copied.'; },
+    () => {
+      const r = document.createRange(); r.selectNodeContents(addr);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      toast.textContent = 'Selected. Press Ctrl+C to copy.';
+    });
+});
+
+// Live GitHub repos (works when hosted on GitHub Pages; falls back to the vault note otherwise)
+fetch('https://api.github.com/users/nekogesha/repos?per_page=100&sort=pushed')
+  .then(r => r.ok ? r.json() : [])
+  .then(repos => {
+    repos = repos.filter(r => !r.fork).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 9);
+    if (!repos.length) return;
+    const grid = document.getElementById('repos');
+    for (const r of repos) {
+      const a = document.createElement('a');
+      a.className = 'repo'; a.href = r.html_url; a.target = '_blank'; a.rel = 'noopener';
+      const b = document.createElement('b'); b.textContent = r.name;
+      const p = document.createElement('p'); p.textContent = r.description || 'No description yet.';
+      const s = document.createElement('small');
+      s.textContent = [r.language, '★ ' + r.stargazers_count, 'updated ' + new Date(r.pushed_at).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })].filter(Boolean).join(' · ');
+      a.append(b, p, s); grid.append(a);
+    }
+    grid.hidden = false;
+    document.getElementById('vault').hidden = true;
+  })
+  .catch(() => {});
+</script>
+
+</body>
+</html>
